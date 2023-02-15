@@ -279,3 +279,92 @@ Processing by UsersController#create as */*
 Completed 422 Unprocessable Entity in 51ms (Views: 0.7ms | ActiveRecord: 3.2ms | Allocations: 3610)
 
 
+Started GET "/users" for ::1 at 2023-02-15 16:45:44 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mCACHE ActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+
+ActiveRecord::PendingMigrationError - Migrations are pending. To resolve this issue, run:
+        bin/rails db:migrate RAILS_ENV=development
+You have 1 pending migration:
+20230215212141_change_users.rb:
+
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2711202859307440470)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to ChangeUsers (20230215212141)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.3ms)[0m  [1m[35mALTER TABLE "users" ADD "email" character varying NOT NULL[0m
+  [1m[36mActiveRecord::SchemaMigration Create (2.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230215212141"]]
+  [1m[36mTRANSACTION (3.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(2711202859307440470)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/users" for ::1 at 2023-02-15 16:46:05 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+Completed 200 OK in 4ms (Views: 1.7ms | ActiveRecord: 0.5ms | Allocations: 1920)
+
+
+Started POST "/users" for ::1 at 2023-02-15 16:47:12 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"\"Gary\"", "email"=>"\"gary@gmail.com\""}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:17:in `create'
+  [1m[36mUser Create (1.8ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at", "email") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "\"Gary\""], ["created_at", "2023-02-15 21:47:12.392407"], ["updated_at", "2023-02-15 21:47:12.392407"], ["email", "\"gary@gmail.com\""]]
+  ↳ app/controllers/users_controller.rb:17:in `create'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:17:in `create'
+Completed 200 OK in 20ms (Views: 0.4ms | ActiveRecord: 7.0ms | Allocations: 7743)
+
+
+Started PATCH "/users" for ::1 at 2023-02-15 16:48:01 -0500
+  
+ActionController::RoutingError (No route matches [PATCH] "/users"):
+  
+Started GET "/users/1" for ::1 at 2023-02-15 16:50:14 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:11:in `show'
+Completed 200 OK in 21ms (Views: 0.9ms | ActiveRecord: 4.6ms | Allocations: 8848)
+
+
+Started PATCH "/users/1" for ::1 at 2023-02-15 16:50:23 -0500
+Processing by UsersController#update as */*
+  Parameters: {"user"=>{"name"=>"\"Shan\"", "email"=>"\"gary@gmail.com\""}, "id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:25:in `update'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:26:in `update'
+  [1m[36mUser Update (1.0ms)[0m  [1m[33mUPDATE "users" SET "name" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["name", "\"Shan\""], ["updated_at", "2023-02-15 21:50:23.789768"], ["id", 1]]
+  ↳ app/controllers/users_controller.rb:26:in `update'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:26:in `update'
+Redirected to http://localhost:3000/users/1
+Completed 302 Found in 13ms (ActiveRecord: 2.6ms | Allocations: 4257)
+
+
+Started GET "/users/1" for ::1 at 2023-02-15 16:50:23 -0500
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:11:in `show'
+Completed 200 OK in 3ms (Views: 0.5ms | ActiveRecord: 0.4ms | Allocations: 677)
+
+
+Started DELETE "/users/1" for ::1 at 2023-02-15 16:50:42 -0500
+Processing by UsersController#destroy as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:34:in `destroy'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:36:in `destroy'
+  [1m[36mUser Destroy (0.9ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/users_controller.rb:36:in `destroy'
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:36:in `destroy'
+Completed 200 OK in 15ms (Views: 0.1ms | ActiveRecord: 3.6ms | Allocations: 2090)
+
+
