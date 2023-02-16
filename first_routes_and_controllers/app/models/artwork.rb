@@ -30,5 +30,8 @@ class Artwork < ApplicationRecord
     through: :shares,
     source: :viewer
 
-  
+  def self.artworks_for_user_id(user_id)
+    user = User.find(user_id)
+    user.artworks + user.shared_artworks
+  end
 end

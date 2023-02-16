@@ -32,7 +32,7 @@ ApplicationRecord.transaction do
 
 
   #artworkshares
-  as1 = ArtworkShare.create!(artwork: a1, viewer: u1)
+  as1 = ArtworkShare.create!(artwork: a1, viewer: u4)
   as2 = ArtworkShare.create!(artwork: a1, viewer: u2)
   as3 = ArtworkShare.create!(artwork: a2, viewer: u3)
   as4 = ArtworkShare.create!(artwork: a3, viewer: u1)
