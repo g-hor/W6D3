@@ -19,6 +19,23 @@ class ArtworksController < ApplicationController
     end
   end
 
+  def update
+    @artwork = Artwork.find(params[:id])
+    if @artwork.update(artwork_params)
+      redirect_to artwork_url(@artwork.id)
+    else
+      render json: @artwork.errors.full_messages, status: 422
+    end
+  end
+
+  def destroy
+    @artwork = Artwork.find(params[:id])
+    if @artwork.destroy
+      render json: "ARTWORK DESTROYED!!!"
+    else
+      render json: @artwork.errors.full_messages, status: 422
+    end
+  end
   
 
   private
