@@ -18,14 +18,18 @@ class User < ApplicationRecord
         inverse_of: :artist
 
 
-    has_many :artwork_shares,
+    has_many :shares,
         primary_key: :id,
         foreign_key: :viewer_id,
         class_name: :ArtworkShare,
         dependent: :destroy,
         inverse_of: :viewer
 
-    has_many :shared_artworks,
-        through: :artwork_shares,
+    has_many :artwork_shares,
+        through: :shares,
         source: :artwork
+
+    # has_many :shared_artworks,
+    #     through: :artworks,
+    #     source: 
 end
