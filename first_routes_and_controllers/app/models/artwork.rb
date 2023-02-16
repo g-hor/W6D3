@@ -10,6 +10,9 @@
 #  updated_at :datetime         not null
 #
 class Artwork < ApplicationRecord
+
+  attr_reader :id
+
   validates :title, presence: true, uniqueness: { scope: :artist_id }
   validates :image_url, uniqueness: true, presence: true
   validates :artist_id, presence: true
