@@ -3,6 +3,10 @@ Rails.application.routes.draw do
 
   resources :users
 
+  resources :artworks
+
+  resources :artwork_shares, only: [:create, :destroy]
+
   # get '/users/new', to: 'users#new', as: 'new_user'
 
   # Defines the root path route ("/")
