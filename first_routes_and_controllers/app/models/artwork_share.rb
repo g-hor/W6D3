@@ -9,9 +9,6 @@
 #  updated_at :datetime         not null
 #
 class ArtworkShare < ApplicationRecord
-
-  attr_reader :id
-
   validates :artwork_id, presence: true, uniqueness: {scope: :viewer_id}
   validates :viewer_id, presence: true
 

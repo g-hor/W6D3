@@ -25,10 +25,10 @@ ApplicationRecord.transaction do
 
 
   #artworks
-  a1 = Artwork.create!(title: "whatever", image_url: "1", artist_id: 1)
-  a2 = Artwork.create!(title: "alsowhatever", image_url: "2", artist_id: 1)
-  a3 = Artwork.create!(title: "monalisa", image_url: "3", artist_id: 3)
-  a4 = Artwork.create!(title: "inches", image_url: "4", artist_id: 4)
+  a1 = Artwork.create!(title: "whatever", image_url: "1", artist: u1)
+  a2 = Artwork.create!(title: "alsowhatever", image_url: "2", artist: u1)
+  a3 = Artwork.create!(title: "monalisa", image_url: "3", artist: u3)
+  a4 = Artwork.create!(title: "inches", image_url: "4", artist: u4)
 
 
   #artworkshares

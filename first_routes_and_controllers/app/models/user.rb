@@ -8,9 +8,6 @@
 #  username   :string           not null
 #
 class User < ApplicationRecord
-
-    attr_reader :id
-    
     validates :username, presence: true, uniqueness: true
 
     has_many :artworks,
