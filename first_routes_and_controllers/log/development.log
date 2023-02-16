@@ -1232,3 +1232,5 @@ Processing by ArtworksController#create as */*
 Completed 201 Created in 14ms (Views: 0.3ms | ActiveRecord: 2.9ms | Allocations: 6879)
 
 
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mArtwork Load (4.4ms)[0m  [1m[34mSELECT DISTINCT "artworks".* FROM "artworks" INNER JOIN "artwork_shares" ON "artworks"."id" = "artwork_shares"."artwork_id" INNER JOIN "artworks" "artworks_shared_artworks" ON "artwork_shares"."artwork_id" = "artworks_shared_artworks"."id" WHERE "artworks_shared_artworks"."artist_id" = $1[0m  [["artist_id", 1]]

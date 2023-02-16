@@ -18,23 +18,25 @@ class User < ApplicationRecord
         inverse_of: :artist
 
 
-    has_many :shares,
+    has_many :artwork_shares,
         primary_key: :id,
         foreign_key: :viewer_id,
         class_name: :ArtworkShare,
         dependent: :destroy,
         inverse_of: :viewer
 
-    has_many :artwork_shares,
-        through: :shares,
+    has_many :shared_artworks,
+        through: :artwork_shares,
         source: :artwork
 
+
+    # WE'RE MAD EXTRA HERE
     has_many :my_shares,
         through: :artworks,
         source: :shares
 
 
-    has_many :shared_artworks,
+    has_many :artworks_i_created_that_have_been_shared, -> { distinct },
         through: :my_shares,
         source: :artwork
 end
