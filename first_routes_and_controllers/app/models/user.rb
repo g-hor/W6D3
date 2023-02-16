@@ -29,6 +29,14 @@ class User < ApplicationRecord
         through: :artwork_shares,
         source: :artwork
 
+    has_many :comments,
+        primary_key: :id,
+        foreign_key: :author_id,
+        class_name: :Comment,
+        inverse_of: :author,
+        dependent: :destroy
+    
+
 
     # WE'RE MAD EXTRA HERE
     has_many :my_shares,
