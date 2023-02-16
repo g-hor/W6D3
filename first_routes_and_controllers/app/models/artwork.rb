@@ -30,6 +30,5 @@ class Artwork < ApplicationRecord
     through: :shares,
     source: :viewer
 
-  # has_many :
   
 end

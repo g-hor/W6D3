@@ -1172,3 +1172,63 @@ Completed 201 Created in 8ms (Views: 0.3ms | ActiveRecord: 1.6ms | Allocations: 
   [1m[36mTRANSACTION (2.7ms)[0m  [1m[35mCOMMIT[0m
   [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
   [1m[36mArtwork Load (0.8ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks" INNER JOIN "artwork_shares" ON "artworks"."id" = "artwork_shares"."artwork_id" WHERE "artwork_shares"."viewer_id" = $1[0m  [["viewer_id", 1]]
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mArtwork Load (2.7ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks" INNER JOIN "artwork_shares" ON "artworks"."id" = "artwork_shares"."artwork_id" WHERE "artwork_shares"."viewer_id" = $1[0m  [["viewer_id", 1]]
+  [1m[36mArtwork Load (2.4ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks" INNER JOIN "artwork_shares" ON "artworks"."id" = "artwork_shares"."artwork_id" INNER JOIN "artworks" "artworks_shared_artworks" ON "artwork_shares"."artwork_id" = "artworks_shared_artworks"."id" WHERE "artworks_shared_artworks"."artist_id" = $1[0m  [["artist_id", 1]]
+Started GET "/users/" for ::1 at 2023-02-16 15:22:18 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#index as */*
+  Parameters: {"user"=>{"name"=>"\"Peter\""}}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+Completed 200 OK in 23ms (Views: 9.5ms | ActiveRecord: 5.3ms | Allocations: 7841)
+
+
+Started GET "/artworks/" for ::1 at 2023-02-16 15:22:35 -0500
+Processing by ArtworksController#index as */*
+  Parameters: {"user"=>{"name"=>"\"Peter\""}}
+  [1m[36mArtwork Load (0.9ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks"[0m
+  ↳ app/controllers/artworks_controller.rb:5:in `index'
+Completed 200 OK in 15ms (Views: 5.7ms | ActiveRecord: 3.5ms | Allocations: 6080)
+
+
+Started GET "/artwork_shares/" for ::1 at 2023-02-16 15:22:53 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/artwork_shares"):
+  
+Started POST "/artwork_shares/?artwork_shares[artwork_id]=4&artwork_shares[viewer_id]=2" for ::1 at 2023-02-16 15:25:17 -0500
+Processing by ArtworkSharesController#create as */*
+  Parameters: {"user"=>{"name"=>"\"Peter\""}, "artwork_shares"=>{"artwork_id"=>"4", "viewer_id"=>"2"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/artwork_shares_controller.rb:5:in `create'
+  [1m[36mArtworkShare Exists? (1.8ms)[0m  [1m[34mSELECT 1 AS one FROM "artwork_shares" WHERE "artwork_shares"."artwork_id" = $1 AND "artwork_shares"."viewer_id" = $2 LIMIT $3[0m  [["artwork_id", 4], ["viewer_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/artwork_shares_controller.rb:5:in `create'
+  [1m[36mArtwork Load (0.2ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks" WHERE "artworks"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/artwork_shares_controller.rb:5:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/artwork_shares_controller.rb:5:in `create'
+  [1m[36mArtworkShare Create (0.7ms)[0m  [1m[32mINSERT INTO "artwork_shares" ("artwork_id", "viewer_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["artwork_id", 4], ["viewer_id", 2], ["created_at", "2023-02-16 20:25:17.574682"], ["updated_at", "2023-02-16 20:25:17.574682"]]
+  ↳ app/controllers/artwork_shares_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/artwork_shares_controller.rb:5:in `create'
+Completed 201 Created in 88ms (Views: 0.3ms | ActiveRecord: 8.1ms | Allocations: 18326)
+
+
+Started POST "/artworks/?artwork[title]=feet&artwork[image_url]=5&artwork[artist_id]=4" for ::1 at 2023-02-16 15:27:13 -0500
+Processing by ArtworksController#create as */*
+  Parameters: {"user"=>{"name"=>"\"Peter\""}, "artwork"=>{"title"=>"feet", "image_url"=>"5", "artist_id"=>"4"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/artworks_controller.rb:15:in `create'
+  [1m[36mArtwork Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "artworks" WHERE "artworks"."title" = $1 AND "artworks"."artist_id" = $2 LIMIT $3[0m  [["title", "feet"], ["artist_id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:15:in `create'
+  [1m[36mArtwork Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "artworks" WHERE "artworks"."image_url" = $1 LIMIT $2[0m  [["image_url", "5"], ["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:15:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:15:in `create'
+  [1m[36mArtwork Create (0.6ms)[0m  [1m[32mINSERT INTO "artworks" ("title", "image_url", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "feet"], ["image_url", "5"], ["artist_id", 4], ["created_at", "2023-02-16 20:27:13.969250"], ["updated_at", "2023-02-16 20:27:13.969250"]]
+  ↳ app/controllers/artworks_controller.rb:15:in `create'
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/artworks_controller.rb:15:in `create'
+Completed 201 Created in 14ms (Views: 0.3ms | ActiveRecord: 2.9ms | Allocations: 6879)
+
+

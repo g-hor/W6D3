@@ -29,7 +29,12 @@ class User < ApplicationRecord
         through: :shares,
         source: :artwork
 
-    # has_many :shared_artworks,
-    #     through: :artworks,
-    #     source: 
+    has_many :my_shares,
+        through: :artworks,
+        source: :shares
+
+
+    has_many :shared_artworks,
+        through: :my_shares,
+        source: :artwork
 end
